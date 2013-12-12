@@ -15,24 +15,34 @@
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
+<!-- Type Kit -->
+<script type="text/javascript" src="//use.typekit.net/duy5rgp.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
 <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="hfeed site">
-	<?php do_action( 'before' ); ?>
-	<header id="masthead" class="site-header" role="banner">
-		<div class="site-branding">
-			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
-		</div>
+<div id="page">
+ 
+    <!-- Header and Nav -->
 
-		<nav id="site-navigation" class="main-navigation" role="navigation">
-			<h1 class="menu-toggle"><?php _e( 'Menu', 'USAWCR' ); ?></h1>
-			<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'USAWCR' ); ?></a>
+	
+	<header id="masthead" role="banner">
+		
+		<div id="branding">
+      		<h1><a href="<?php echo home_url(); ?>"> <img src="<?php echo get_template_directory_uri(); ?>/img/usa-wheelchair-rugby-logo2x.png"> </a> </h1>
+   		</div>
 
-			<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+		<nav id="main-navigation" role="navigation">
+			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'inline-list') ); ?>
+		</nav>
+	
+	</header>
+
+	<?php if ( ! dynamic_sidebar( 'hero' ) ) : ?>
+	<?php endif; ?>
+
+	 <!-- End Header and Nav -->
 
 	<div id="content" class="site-content">

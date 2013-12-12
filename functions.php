@@ -42,7 +42,7 @@ function USAWCR_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
-		'primary' => __( 'Primary Menu', 'USAWCR' ),
+		'primary' 	 => __( 'Primary Menu', 'USAWCR' ),
 	) );
 
 	// Enable support for Post Formats.
@@ -62,12 +62,30 @@ add_action( 'after_setup_theme', 'USAWCR_setup' );
  */
 function USAWCR_widgets_init() {
 	register_sidebar( array(
-		'name'          => __( 'Sidebar', 'USAWCR' ),
-		'id'            => 'sidebar-1',
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1>',
+		'name'          => __( 'Hero', 'USAWCR' ),
+		'id'            => 'hero',
+		'before_widget' => '<div id="hero">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="hide">',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Top-A', 'USAWCR' ),
+		'id'            => 'hero',
+		'before_widget' => '<div id="top-a">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="hide">',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Top-B', 'USAWCR' ),
+		'id'            => 'hero',
+		'before_widget' => '<div id="top-b">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="hide">',
+		'after_title'   => '</h2>',
 	) );
 }
 add_action( 'widgets_init', 'USAWCR_widgets_init' );
@@ -76,11 +94,10 @@ add_action( 'widgets_init', 'USAWCR_widgets_init' );
  * Enqueue scripts and styles.
  */
 function USAWCR_scripts() {
-	wp_enqueue_style( 'USAWCR-style', get_stylesheet_uri() );
 
-	wp_enqueue_script( 'USAWCR-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
-
-	wp_enqueue_script( 'USAWCR-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
+	wp_enqueue_style( 'style', get_template_directory_uri() . '/css/style.css', false, '1.1', 'all' );
+	
+	wp_enqueue_script( 'USAWCR-Foundation', get_template_directory_uri() . '/js/foundation.min.js', array(), '20120206', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -88,10 +105,13 @@ function USAWCR_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'USAWCR_scripts' );
 
-/**
- * Implement the Custom Header feature.
- */
-//require get_template_directory() . '/inc/custom-header.php';
+// require jquery 
+if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
+function my_jquery_enqueue() {
+   wp_deregister_script('jquery');
+   wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", false, null);
+   wp_enqueue_script('jquery');
+}
 
 /**
  * Custom template tags for this theme.
