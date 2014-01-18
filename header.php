@@ -23,26 +23,40 @@
 </head>
 
 <body <?php body_class(); ?>>
+
+<div id="toolbar">
+<ul class="inline-list">
+<li><a href="#"><i style="line-height: 35px;" class="fa fa-caret-down"> </i> More</a></li>
+<li><a href="#"><i style="line-height: 35px;" class="fa fa-facebook"> </i> 40,141 Likes</a></li>
+<li><a href="#"><i style="line-height: 35px;" class="fa fa-twitter"> </i> 21,241 Followers</a></li>
+
+</ul>
+</div>
+
+<div id="register">
+<a>Join USA Rugby <i style="padding-left: 5px;" class="fa fa-chevron-circle-right"></i></a>
+</div>
+
+
 <div id="page">
  
     <!-- Header and Nav -->
 
 	
 	<header id="masthead" role="banner">
-		
-		<div id="branding">
-      		<h1><a href="<?php echo home_url(); ?>"> <img src="<?php echo get_template_directory_uri(); ?>/img/usa-wheelchair-rugby-logo2x.png"> </a> </h1>
-   		</div>
+		<div class="header-container">
+			<div id="branding">
+	      		<h1><a href="<?php echo home_url(); ?>"> <img src="<?php echo get_template_directory_uri(); ?>/img/logo.png"> </a> </h1>
+	   		</div>
 
-		<nav id="main-navigation" role="navigation">
-			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'inline-list') ); ?>
-		</nav>
-	
+			<nav id="main-navigation" role="navigation">
+				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'inline-list') ); ?>
+			</nav>
+		</div>
 	</header>
-
-	<?php if ( ! dynamic_sidebar( 'hero' ) ) : ?>
-	<?php endif; ?>
 
 	 <!-- End Header and Nav -->
 
 	<div id="content" class="site-content">
+
+

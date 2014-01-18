@@ -72,7 +72,7 @@ function USAWCR_widgets_init() {
 
 	register_sidebar( array(
 		'name'          => __( 'Top-A', 'USAWCR' ),
-		'id'            => 'hero',
+		'id'            => 'top-a',
 		'before_widget' => '<div id="top-a">',
 		'after_widget'  => '</div>',
 		'before_title'  => '<h2 class="hide">',
@@ -81,8 +81,35 @@ function USAWCR_widgets_init() {
 
 	register_sidebar( array(
 		'name'          => __( 'Top-B', 'USAWCR' ),
-		'id'            => 'hero',
+		'id'            => 'top-b',
 		'before_widget' => '<div id="top-b">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="hide">',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Main Top Left', 'USAWCR' ),
+		'id'            => 'main-top-left',
+		'before_widget' => '<div id="main-top-left">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="hide">',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Main Top Right', 'USAWCR' ),
+		'id'            => 'main-top-right',
+		'before_widget' => '<div id="main-top-right">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="hide">',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Sidebar Right', 'USAWCR' ),
+		'id'            => 'sidebar-right',
+		'before_widget' => '<div id="sidebar-right">',
 		'after_widget'  => '</div>',
 		'before_title'  => '<h2 class="hide">',
 		'after_title'   => '</h2>',
@@ -97,7 +124,7 @@ function USAWCR_scripts() {
 
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/css/style.css', false, '1.1', 'all' );
 	
-	wp_enqueue_script( 'USAWCR-Foundation', get_template_directory_uri() . '/js/foundation.min.js', array(), '20120206', true );
+	wp_enqueue_script( 'USAWCR-Foundation', get_template_directory_uri() . '/js/main.js', array(), '20120206', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -105,30 +132,32 @@ function USAWCR_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'USAWCR_scripts' );
 
+//imclude custom widgets
+include("widgets/simple-widget.php");
+
+//add images
+add_image_size( 'main', 816, 459, true );
+
 // require jquery 
 if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
 function my_jquery_enqueue() {
    wp_deregister_script('jquery');
-   wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", false, null);
+   wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js", false, null);
    wp_enqueue_script('jquery');
 }
 
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
+// Automatically add FitVids to oembed YouTube videos
+function your_theme_embed_filter( $output, $data, $url ) {
+ 
+	$return = '<div class="video">'.$output.'</div>';
+	return $return;
+ 
+}
+add_filter('oembed_dataparse', 'your_theme_embed_filter', 90, 3 );
 
-/**
- * Custom functions that act independently of the theme templates.
- */
-require get_template_directory() . '/inc/extras.php';
-
-/**
- * Customizer additions.
- */
-require get_template_directory() . '/inc/customizer.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-require get_template_directory() . '/inc/jetpack.php';
+// customize embed settings
+add_filter( 'oembed_result', 'hide_youtube_related_videos', 10, 3);
+ function hide_youtube_related_videos($data, $url, $args = array()) {
+ $data = preg_replace('/(youtube\.com.*)(\?feature=oembed)(.*)/', '$1?' . apply_filters("hyrv_extra_querystring_parameters", "&modestbranding=1&rel=0&showinfo=0&autohide=1&vq=hd720") . 'rel=0$3', $data);
+ return $data;
+ }

@@ -3,60 +3,110 @@
  * @package USA Wheel Chair Rugby
  */
 ?>
+                  	
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<h1 class="entry-title"><?php the_title(); ?></h1>
+<div class="main-container row">
+	<main class="large-9 columns story">
 
-		<div class="entry-meta">
-			<?php USAWCR_posted_on(); ?>
-		</div><!-- .entry-meta -->
-	</header><!-- .entry-header -->
+	<?php 
+	//if there's a slideshow, load the script.
+	if(get_field('slideshow')) { ?>
+		<script> $(document).ready(function() { 
+		 $(".slideshow").royalSlider({
+            imageScaleMode: "fill",
+            sliderDrag: false,
+            loop: true
+        });
+	});
+	</script>
+			  
+<?php }; 
 
-	<div class="entry-content">
-		<?php the_content(); ?>
-		<?php
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'USAWCR' ),
-				'after'  => '</div>',
-			) );
-		?>
-	</div><!-- .entry-content -->
+$youtube  = get_field('youtube_link');
+$slideshow = get_field('slideshow');
+$designate_hero = get_field('designate_hero');
 
-	<footer class="entry-meta">
-		<?php
-			/* translators: used between list items, there is a space after the comma */
-			$category_list = get_the_category_list( __( ', ', 'USAWCR' ) );
+//get YouTube Video ID
+$video_id = explode("?v=", $youtube);
+$video_id = $video_id[1];
 
-			/* translators: used between list items, there is a space after the comma */
-			$tag_list = get_the_tag_list( '', __( ', ', 'USAWCR' ) );
+//get Video title
 
-			if ( ! USAWCR_categorized_blog() ) {
-				// This blog only has 1 category so we just need to worry about tags in the meta text
-				if ( '' != $tag_list ) {
-					$meta_text = __( 'This entry was tagged %2$s. Bookmark the <a href="%3$s" rel="bookmark">permalink</a>.', 'USAWCR' );
-				} else {
-					$meta_text = __( 'Bookmark the <a href="%3$s" rel="bookmark">permalink</a>.', 'USAWCR' );
-				}
+$xmlData = simplexml_load_string(file_get_contents("http://gdata.youtube.com/feeds/api/videos/{$video_id}?fields=title"));
+$youtube_title = (string)$xmlData->title;
 
-			} else {
-				// But this blog has loads of categories so we should probably display them here
-				if ( '' != $tag_list ) {
-					$meta_text = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" rel="bookmark">permalink</a>.', 'USAWCR' );
-				} else {
-					$meta_text = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" rel="bookmark">permalink</a>.', 'USAWCR' );
-				}
+// get YouTube thumbnail
+$youtube_thumb = 'http://img.youtube.com/vi/'.$video_id.'/maxresdefault.jpg';
 
-			} // end check for categories on this blog
 
-			printf(
-				$meta_text,
-				$category_list,
-				$tag_list,
-				get_permalink()
-			);
-		?>
 
-		<?php edit_post_link( __( 'Edit', 'USAWCR' ), '<span class="edit-link">', '</span>' ); ?>
-	</footer><!-- .entry-meta -->
-</article><!-- #post-## -->
+?>
+
+		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+			<div class="row story-header">
+		
+			<?php if($youtube && $designate_hero == 'video') {
+			     _e(wp_oembed_get($youtube)); 
+			} 
+			if ($slideshow && $designate_hero == 'slideshow' ) { ?>
+				<div class="slideshow rsDefault">
+		       		 <?php foreach( $slideshow as $image ): ?>
+		       		 	<div><img class="rsImg" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" /></div>
+		      	 	<?php endforeach; ?>
+		      	</div>
+		      	<?php }
+		    if ($designate_hero == 'picture') { ?>
+				<div class="picture"><?php the_post_thumbnail('main');?></div>
+		    <?php } ?>
+
+			<h1 class="title"><?php the_title(); ?></h1>
+			<p class="meta">
+					<?php 
+					$categories = get_the_category($post->ID);
+					foreach($categories as $category) :
+						$children = get_categories( array ('parent' => $category->term_id ));
+						$has_children = count($children);
+						if ( $has_children == 0 ) {
+					 	$cat = $category->name;
+						}
+					endforeach;
+						$author = get_the_author();
+						$author_link = get_the_author_meta('user_url');
+						$email = get_the_author_meta('email');
+						$image = get_avatar($email, 64);
+						$category = get_the_category();
+						$date = get_the_date('F j, Y');
+						echo '<a href="'.$author_link.'">'.$image . '<span class="author">' . $author .'</span></a> on '. $date;
+					?>
+			</p>
+
+		</div>
+
+		<div class="row story-content">
+		<?php if($youtube && $designate_hero != 'video') { ?>
+				<div class="youtube article-aside"> 
+					<a class="various fancybox fancybox.iframe" href="http://www.youtube.com/embed/L9szn1QQfas?autoplay=1"><img src="<?php echo $youtube_thumb ?>"></a>
+				</div>
+		<?php }
+		the_content(); ?>
+		</div>	
+
+		<div class="story-footer">
+			<?php edit_post_link( __( 'Edit', 'USAWCR' ), '<span class="edit-link">', '</span>' ); ?>
+		</div>
+
+		</article>
+
+	</main>
+
+	<aside class="large-3 columns sidebar">
+		
+		<div class="news-feed">
+				<?php if ( ! dynamic_sidebar( 'sidebar-right' ) ) : ?>
+				<?php endif; ?>
+		</div>
+	
+	</aside>
+
+</div>
