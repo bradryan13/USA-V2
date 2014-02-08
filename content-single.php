@@ -5,60 +5,59 @@
 ?>
                   	
 
-<div class="main-container row">
-	<main class="large-9 columns story">
 
-	<?php 
-	//if there's a slideshow, load the script.
-	if(get_field('slideshow')) { ?>
-		<script> $(document).ready(function() { 
+<?php 
+
+//if there's a slideshow, load the script.
+if (get_field('slideshow')) : ?>
+
+	<script> 
+	jQuery(document).ready(function ($) {
 		 $(".slideshow").royalSlider({
-            imageScaleMode: "fill",
-            sliderDrag: false,
-            loop: true
-        });
+		    imageScaleMode: "fill",
+		    sliderDrag: false,
+		    loop: true
+		});
 	});
 	</script>
 			  
-<?php }; 
+<?php endif; 
 
+
+//Extract information from YouTube
 $youtube  = get_field('youtube_link');
-$slideshow = get_field('slideshow');
-$designate_hero = get_field('designate_hero');
-
-//get YouTube Video ID
 $video_id = explode("?v=", $youtube);
 $video_id = $video_id[1];
-
 //get Video title
-
 $xmlData = simplexml_load_string(file_get_contents("http://gdata.youtube.com/feeds/api/videos/{$video_id}?fields=title"));
 $youtube_title = (string)$xmlData->title;
-
 // get YouTube thumbnail
 $youtube_thumb = 'http://img.youtube.com/vi/'.$video_id.'/maxresdefault.jpg';
 
 
+//create the slideshow
+$slideshow = get_field('slideshow');
+
+
+//Set the hero
+$designate_hero = get_field('designate_hero');
+
+if($youtube && $designate_hero == 'video') {
+    $hero = _e(wp_oembed_get($youtube)); 
+} elseif ($slideshow && $designate_hero == 'slideshow' ) { 
+	$hero = '<div class="slideshow rsDefault"></div>';
+} else {
+	$hero = '<div class="picture">'. the_post_thumbnail('main') . '</div>';
+}
 
 ?>
 
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-			<div class="row story-header">
+			<div class="story-header">
 		
-			<?php if($youtube && $designate_hero == 'video') {
-			     _e(wp_oembed_get($youtube)); 
-			} 
-			if ($slideshow && $designate_hero == 'slideshow' ) { ?>
-				<div class="slideshow rsDefault">
-		       		 <?php foreach( $slideshow as $image ): ?>
-		       		 	<div><img class="rsImg" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" /></div>
-		      	 	<?php endforeach; ?>
-		      	</div>
-		      	<?php }
-		    if ($designate_hero == 'picture') { ?>
-				<div class="picture"><?php the_post_thumbnail('main');?></div>
-		    <?php } ?>
+			
+
 
 			<h1 class="title"><?php the_title(); ?></h1>
 			<p class="meta">
@@ -83,7 +82,7 @@ $youtube_thumb = 'http://img.youtube.com/vi/'.$video_id.'/maxresdefault.jpg';
 
 		</div>
 
-		<div class="row story-content">
+		<div class="story-content">
 		<?php if($youtube && $designate_hero != 'video') { ?>
 				<div class="youtube article-aside"> 
 					<a class="various fancybox fancybox.iframe" href="http://www.youtube.com/embed/L9szn1QQfas?autoplay=1"><img src="<?php echo $youtube_thumb ?>"></a>
@@ -98,15 +97,5 @@ $youtube_thumb = 'http://img.youtube.com/vi/'.$video_id.'/maxresdefault.jpg';
 
 		</article>
 
-	</main>
 
-	<aside class="large-3 columns sidebar">
-		
-		<div class="news-feed">
-				<?php if ( ! dynamic_sidebar( 'sidebar-right' ) ) : ?>
-				<?php endif; ?>
-		</div>
-	
-	</aside>
 
-</div>

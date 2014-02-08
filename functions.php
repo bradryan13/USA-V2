@@ -42,8 +42,10 @@ function USAWCR_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
-		'primary' 	 => __( 'Primary Menu', 'USAWCR' ),
+		'primary' 	 => __( 'Primary Menu', 'USAWCR' ), 
+		'club' 	 => __( 'Club Menu', 'USAWCR' ), 
 	) );
+
 
 	// Enable support for Post Formats.
 	add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
@@ -71,9 +73,9 @@ function USAWCR_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'          => __( 'Top-A', 'USAWCR' ),
-		'id'            => 'top-a',
-		'before_widget' => '<div id="top-a">',
+		'name'          => __( 'Club Sidebar', 'USAWCR' ),
+		'id'            => 'club-side-bar',
+		'before_widget' => '<div>',
 		'after_widget'  => '</div>',
 		'before_title'  => '<h2 class="hide">',
 		'after_title'   => '</h2>',
@@ -142,7 +144,7 @@ add_image_size( 'main', 816, 459, true );
 if (!is_admin()) add_action("wp_enqueue_scripts", "my_jquery_enqueue", 11);
 function my_jquery_enqueue() {
    wp_deregister_script('jquery');
-   wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js", false, null);
+   wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js", false, null);
    wp_enqueue_script('jquery');
 }
 

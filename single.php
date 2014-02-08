@@ -7,16 +7,23 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-
+<main class="row">
+	
+	<section class="large-9 columns content">
+	
 		<?php while ( have_posts() ) : the_post(); ?>
-
 			<?php get_template_part( 'content', 'single' ); ?>
-
 		<?php endwhile; // end of the loop. ?>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+	</section>
+
+	<aside class="large-3 columns sidebar">
+			
+		<?php if ( ! dynamic_sidebar( 'sidebar-right' ) ) : ?>
+		<?php endif; ?>
+	
+	</aside>
+
+</main>
 
 <?php get_footer(); ?>

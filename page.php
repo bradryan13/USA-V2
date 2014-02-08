@@ -12,24 +12,37 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+<div class="row page-header">
 
+	<div class="large-8 columns">
+		<h1>Club Rugby</h1>
+	</div>
+
+	<div class="large-4 columns">
+		
+	</div>
+</div>
+
+<main class="row">
+	
+	<aside class="large-3 medium-3 columns sidebar" data-snap-ignore="true">
+
+		<?php if ( ! dynamic_sidebar( 'club-side-bar' ) ) : ?>
+		<?php endif; ?>	
+
+	</aside>
+
+
+	<section class="content-wrapper large-9 medium-9 columns">
+		<div id="content">
+		
 			<?php while ( have_posts() ) : the_post(); ?>
 
 				<?php get_template_part( 'content', 'page' ); ?>
 
-				<?php
-					// If comments are open or we have at least one comment, load up the comment template
-					if ( comments_open() || '0' != get_comments_number() ) :
-						comments_template();
-					endif;
-				?>
-
 			<?php endwhile; // end of the loop. ?>
+		</div>
+	</section>
+</main>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
-
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

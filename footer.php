@@ -8,19 +8,38 @@
  */
 ?>
 
-	</div><!-- #content -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-			<?php do_action( 'USAWCR_credits' ); ?>
-			<a href="http://wordpress.org/" rel="generator"><?php printf( __( 'Proudly powered by %s', 'USAWCR' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( __( 'Theme: %1$s by %2$s.', 'USAWCR' ), 'USA Wheel Chair Rugby', '<a href="http://underscores.me/" rel="designer">Bradley Ryan</a>' ); ?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+	<footer>
+
+	</footer>
 
 <?php wp_footer(); ?>
 
+
+<?php
+if ( is_home() ) { ?>
+
+<script>
+
+
+      $(function () { 
+            var slider = $(".royalSlider").data('royalSlider');
+                slider.ev.on('rsVideoPlay', function() {
+                    // video start
+                    $( ".rsGCaption, .bottom-mask" ).fadeOut(200);
+                });
+                slider.ev.on('rsVideoStop', function() {
+                   $( ".rsGCaption, .bottom-mask" ).fadeIn(200);
+                });
+            });
+</script>
+
+<?php } ?>
+</div>
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>
+
 </html>
+
+
