@@ -9,9 +9,19 @@
 ?>
 
 
-	<footer>
+<footer>
+    
+    <div class="row featured-sponsor">
+        <img src="#">
+    </div>
 
-	</footer>
+    <div class="row footer-menu">
+
+        <?php wp_nav_menu( array( 'theme_location' => 'footer-menu', 'container' => false, 'menu_class' => 'footer-menu') ); ?>
+    
+    </div>
+
+</footer>
 
 <?php wp_footer(); ?>
 

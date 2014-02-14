@@ -4354,7 +4354,7 @@ a.rsLink {
   left: auto;
   width: 265px;
   height: auto;
-  background: #1c2939;
+  background: #222f43;
   background-color: #0C0C0C;
   z-index: 0;
   overflow: auto;
@@ -4382,7 +4382,7 @@ a.rsLink {
   line-height: 50px;
   padding-left: 30px;
   border-bottom: 1px solid #212425;
-  background: #1c2939;
+  background: #222f43;
 }
 .mobile-menu ul li a {
   height: 40px;
@@ -4469,7 +4469,7 @@ header .header-container {
   height: 45px;
   margin-top: 40px;
   z-index: 3;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
   background: url('../img/header-bg.png') center top no-repeat;
 }
 #main-navigation:before {
@@ -4835,8 +4835,9 @@ Version:	2.0
 .page-header {
   background: url('../img/header-bg.jpg') center top no-repeat;
   min-height: 180px;
-  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
   position: relative;
+  z-index: 2;
 }
 .page-header h1 {
   line-height: 180px;
@@ -4851,17 +4852,17 @@ Version:	2.0
   padding: 0;
 }
 #content {
-  box-shadow: -2px -2px 8px -4px rgba(0, 0, 0, 0.5);
+  box-shadow: -2px 0px 5px 0px rgba(0, 0, 0, 0.6);
 }
 #content .title {
-  font-size: 32px;
-  height: 70px;
-  line-height: 75px;
+  font-size: 36px;
+  height: 104px;
+  line-height: 104px;
   letter-spacing: -1px;
-  background: #EEF0F3;
+  background: #F8F9FB;
   margin: 0;
   padding: 0 0 0 100px;
-  border-bottom: 1px solid #d6dae3;
+  border-bottom: 1px solid #E2E6F0;
   color: #001830;
   position: relative;
   font-weight: 300;
@@ -4905,33 +4906,45 @@ Version:	2.0
 /* 1. Sidebar  -----------------------------------------------------*/
 .sidebar {
   padding: 0;
-  background: #1c2939;
+  background: #222f43;
 }
 .sidebar ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.sidebar ul:after {
-  content: '';
-  height: 4px;
-  width: 100%;
-  background: #202329;
-  border-bottom: 1px solid #2D343D;
-  border-top: 1px solid #000;
-  position: absolute;
-  bottom: -4px;
+.sidebar .sub-menu {
+  display: none;
 }
 /* 2. Menu Level 1 --------------------------------------------------*/
 .menu > li > a {
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   position: relative;
-  color: #BBC0C9;
+  color: #B9BDC3;
   line-height: 50px;
   padding-left: 30px;
-  border-bottom: 1px solid #212425;
-  background: #1c2939;
+  border-top: 1px solid #314360;
+  border-bottom: 1px solid #0F1723;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #222f43), color-stop(100%, #1e2b40));
+}
+.menu > li > a.active {
+  background: #071D32;
+  color: #FFF;
+  border-bottom: 0;
+  border-top: 0;
+  box-shadow: inset 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+.menu > li > a.active:before {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 50px;
+  width: 6px;
+  background: url('../img/active-menu.png') center top no-repeat;
+  content: '';
+  z-index: 0;
 }
 /* 3. Menu Level 2 --------------------------------------------------*/
 .menu ul li a {
@@ -4943,9 +4956,6 @@ Version:	2.0
   line-height: 40px;
   font-size: 12px;
   background: #253447;
-}
-.sub-menu {
-  display: none;
 }
 /* 3. Fixed Element --------------------------------------------------*/
 .menu.fixed {
@@ -4959,7 +4969,7 @@ Version:	2.0
 }
 @media only screen and (max-width: 64em) {
   body {
-    background: #1c2939;
+    background: #222f43;
   }
   .page-header,
   main.row {
@@ -5043,6 +5053,11 @@ Version:	2.0
     top: 18px;
   }
 }
+@media only screen and (max-width: 480px) {
+  .page-header h1 {
+    font-size: 40px;
+  }
+}
 /* 2. Fonts  ------------------------------------------------------*/
 a {
   text-decoration: none;
@@ -5065,9 +5080,9 @@ body {
   position: relative;
 }
 main {
-  background: #1c2939;
+  background: #222f43;
   min-height: 1200px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
 }
 #content {
   background: #FFF;

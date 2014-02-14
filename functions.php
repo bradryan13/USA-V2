@@ -44,6 +44,7 @@ function USAWCR_setup() {
 	register_nav_menus( array(
 		'primary' 	 => __( 'Primary Menu', 'USAWCR' ), 
 		'club' 	 => __( 'Club Menu', 'USAWCR' ), 
+		'footer-menu' 	 => __( 'Footer Menu', 'USAWCR' )
 	) );
 
 
