@@ -18,17 +18,47 @@ Version:	2.0
 .page-header {
 	background: url('../img/header-bg.jpg') center top no-repeat;
 	min-height: 180px;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	box-shadow: 12px 0 15px -4px rgba(0, 0, 0, 0.8), -12px 0 8px -4px rgba(0, 0, 0, 0.8), 0px 2px 3px 0px rgba(0, 0, 0, 0.2), inset 0px 2px 5px 0px rgba(0, 0, 0, 0.4);
 	position: relative;
-	z-index: 2;
+	z-index: 3;
+	max-width: 1022px;
 	h1 {
 		line-height: 180px;
 		font-size: 80px;
-		color: #FFF;
+		color: @sidebar;
 		margin: 0;
-		padding-left: 30px;
+		letter-spacing: -3px;
+		padding-left: 20px;
+		position: relative;
 		font-family: @narrow-font;
+		&:after {
+			position: absolute;
+			bottom: 40px;
+			left: 25px;
+			content: '';
+			width: 40px;
+			height: 8px;
+			background: @sidebar;
+		}
 	}
+	&:before {
+    	position: absolute;
+		width: 10px;
+		height: 10px;
+		left: 1px;
+		bottom: -10px;
+		content: '';
+		background: url('../img/nav-left.png');
+    }
+    &:after {
+    	position: absolute;
+		width: 10px;
+		height: 10px;
+		right: 1px;
+		bottom: -10px;
+		content: '';
+		background: url('../img/nav-right.png');
+    }
 }
 
 .content-wrapper {
@@ -37,19 +67,18 @@ Version:	2.0
 }
 
 #content {
-	box-shadow: -2px 0px 5px 0px rgba(0, 0, 0, .6);
 	.title {
 			font-size: 36px;
 			height: 104px;
 			line-height: 104px;
 			letter-spacing: -1px;
-			background: #F8F9FB;
 			margin: 0;
-			padding: 0 0 0 100px;
+			padding: 0;
 			border-bottom: 1px solid #E2E6F0;
 			color: #001830;
 			position: relative;
 			font-weight: 300;
+			margin: 0 100px;
 	}
 	p {
 		font-size: 16px;
@@ -76,4 +105,4 @@ Version:	2.0
 		top: 20%;
 		position: absolute;
 	}
-}	
+}
