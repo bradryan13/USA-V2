@@ -28,7 +28,7 @@ Version:	2.0
 
 /* 2. Menu Level 1 --------------------------------------------------*/
 
-.menu li a {
+.menu > li > a {
 	display: block;
 	font-size: 13px;
 	position: relative;
@@ -78,8 +78,41 @@ Version:	2.0
 	 width: 250px; top: 0px;
 }
 
-/* 4. Small Menu --------------------------------------------------*/
 
-.menu.fixed {
-	 width: 250px; top: 0px;
+/* 4. Player Menu ---------------------------------------------------*/
+ 
+
+#playermenu {
+	background: #333;
+	position: absolute;
+	z-index: -1;
+	left: 0px;
+	top: 0px;
+	width: 250px;
+	-webkit-transition: 0.4s cubic-bezier(0.694, 0.0482, 0.335, 1);
+	-moz-transition: 0.4s cubic-bezier(0.694, 0.0482, 0.335, 1);
+	-o-transition: 0.4s cubic-bezier(0.694, 0.0482, 0.335, 1);
+	-ms-transition: 0.5s cubic-bezier(0.694, 0.0482, 0.335, 1);
+	transition: 0.4s cubic-bezier(0.694, 0.0482, 0.335, 1);
+	padding: 0;
+	background: #001830;
+	height: 100%;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	&.open {
+		left: -250px;
+	}
+	li a {
+		display: block;
+		font-size: 13px;
+		position: relative;
+		color: #B9BDC3;
+		line-height: 50px;
+		padding-left: 50px;
+		background: #373E45;
+	}
 }

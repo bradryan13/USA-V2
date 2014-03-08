@@ -1,15 +1,11 @@
 <?php
-/**
- * The template for displaying all pages.
- *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site will use a
- * different template.
- *
- * @package USA Wheel Chair Rugby
- */
+/*
+Template Name: Players
+*/
 
+/* This example is for a child theme of Twenty Thirteen: 
+*  You'll need to adapt it the HTML structure of your own theme.
+*/
 get_header(); ?>
 
 <div class="row page-header">
@@ -42,11 +38,28 @@ get_header(); ?>
 
 			<?php while ( have_posts() ) : the_post(); ?>
 
-				<?php get_template_part( 'content', 'page' ); ?>
+				<?php get_template_part( 'content', 'players' ); ?>
 
 			<?php endwhile; // end of the loop. ?>
 		</div>
 	</section>
 </main>
+
+<script>
+
+	$(document).ajaxComplete(function(){
+		 $("#menu-toggle").click(function(){
+
+	        if($("#playermenu").hasClass("open")) {
+	            $("#playermenu").removeClass( "open" );
+	        } else {
+	            $("#playermenu").addClass( "open" );
+	        }
+
+    	});
+	});
+
+
+</script>
 
 <?php get_footer(); ?>

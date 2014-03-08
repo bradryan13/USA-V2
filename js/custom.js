@@ -3,6 +3,7 @@
 jQuery(document).ready(function ($) {
 
 	//enable mobile-menu
+    //
 
     var snapper = new Snap({
         element: document.getElementById('page-content'),
@@ -62,18 +63,6 @@ jQuery(document).ready(function ($) {
         iframe: { preload: false }
     });
 
-            //Fix side-menu
-
-        $(window).bind('scroll', function() {
-            if ($(window).scrollTop() > 332) {
-                $('.menu').addClass('fixed');
-            }
-            else {
-                 $('.menu').removeClass('fixed');
-             }
-        });
-
-
  	//menu Menu Functionality 
  	
  	$( ".menu li a" ).addClass( "ajax" );
@@ -109,4 +98,6 @@ jQuery(document).ready(function ($) {
 
 
 	});
+
 });
+

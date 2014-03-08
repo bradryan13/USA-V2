@@ -1,12 +1,19 @@
 <?php
 /**
- * The template used for displaying page content in page.php
+ * The template used for displaying page content in page-players.php
  *
  * @package USA Wheel Chair Rugby
  */
 ?>
 
-
+<div id="playermenu">
+	<ul>
+			<li><a id="menu-toggle">Menu Toggle</a></li>
+			<li><a><span>Bradley Ryan</span></a>
+			<li><a><span>Bradley Ryan</span></a>
+			<li><a><span>Bradley Ryan</span></a>
+	</ul>
+</div>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="entry-header">

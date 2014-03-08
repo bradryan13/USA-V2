@@ -4395,125 +4395,6 @@ a.rsLink {
   background: #253447;
 }
 /*------------------------------------------------------------------
-[Header Stylesheet]
-
-Project:	USA Rugby
-Version:	2.0
-
-1. Header
-2. Toolbar
-3. Register
-4. Branding
-5. Navigation
-
--------------------------------------------------------------------*/
-/* 1. Header ------------------------------------------------------*/
-header .header-container {
-  max-width: 1022px;
-  margin: 0 auto;
-  position: relative;
-}
-/* 2. Toolbar ----------------------------------------------------*/
-#toolbar {
-  height: 35px;
-}
-#toolbar ul li {
-  float: right;
-}
-#toolbar ul li a {
-  font-size: 12px;
-  color: #B4B9BD;
-  font-weight: bold;
-  line-height: 35px;
-  -webkit-font-smoothing: antialiased;
-}
-/* 3. Register -----------------------------------------------------*/
-#register {
-  height: 35px;
-  position: relative;
-}
-#register a {
-  position: absolute;
-  right: 30px;
-  top: 20px;
-  background: #d82731;
-  color: #FFF;
-  padding: 10px 20px;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  -webkit-font-smoothing: antialiased;
-}
-/* 4. Branding --------------------------------------------------*/
-#branding {
-  float: left;
-  position: absolute;
-  top: -90px;
-  left: -10px;
-  z-index: 4;
-}
-#branding h1 {
-  padding: 0;
-  font-size: 0;
-  line-height: 80px;
-  margin: 0;
-}
-#branding h1 img {
-  height: 127px;
-}
-/* 5. Navigation ------------------------------------------------*/
-#main-navigation {
-  z-index: 1;
-  transition: all .3s ease;
-  position: relative;
-  height: 45px;
-  margin-top: 40px;
-  z-index: 3;
-  box-shadow: 0 0 40px -2px rgba(0, 0, 0, 0.3);
-  background: url('../img/header-bg.png') center top no-repeat;
-}
-#main-navigation:before {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  left: 1px;
-  bottom: -10px;
-  content: '';
-  background: url('../img/nav-left.png');
-}
-#main-navigation:after {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  right: 1px;
-  bottom: -10px;
-  content: '';
-  background: url('../img/nav-right.png');
-}
-#main-navigation ul {
-  margin: 0;
-  float: right;
-}
-#main-navigation ul li {
-  margin: 0;
-  -webkit-transition: all 0.2s ease-out;
-  padding: 0 36px 0 8px;
-  background: url('http://www.arsenal.com/assets/images/structure/blue-ribbon-a.png') right center no-repeat;
-}
-#main-navigation ul li:last-child {
-  background: transparent;
-  padding-right: 30px;
-}
-#main-navigation a {
-  color: #FFF;
-  font-size: 16px;
-  font-family: "refrigerator-deluxe";
-  line-height: 45px;
-  text-transform: uppercase;
-  -webkit-font-smoothing: antialiased;
-  font-weight: bold;
-}
-/*------------------------------------------------------------------
 [Home Stylesheet]
 
 Project:	USA Rugby
@@ -4881,6 +4762,14 @@ Version:	2.0
   background: #FFF;
   padding: 0;
 }
+#content {
+  position: relative;
+}
+#content article {
+  z-index: 1;
+  background: #FFF;
+  min-height: 1200px;
+}
 #content .title {
   font-size: 36px;
   height: 104px;
@@ -4944,7 +4833,7 @@ Version:	2.0
   display: none;
 }
 /* 2. Menu Level 1 --------------------------------------------------*/
-.menu li a {
+.menu > li > a {
   display: block;
   font-size: 13px;
   position: relative;
@@ -4989,10 +4878,40 @@ Version:	2.0
   width: 250px;
   top: 0px;
 }
-/* 4. Small Menu --------------------------------------------------*/
-.menu.fixed {
-  width: 250px;
+/* 4. Player Menu ---------------------------------------------------*/
+#playermenu {
+  background: #333;
+  position: absolute;
+  z-index: -1;
+  left: 0px;
   top: 0px;
+  width: 250px;
+  -webkit-transition: 0.4s cubic-bezier(0.694, 0.0482, 0.335, 1);
+  -moz-transition: 0.4s cubic-bezier(0.694, 0.0482, 0.335, 1);
+  -o-transition: 0.4s cubic-bezier(0.694, 0.0482, 0.335, 1);
+  -ms-transition: 0.5s cubic-bezier(0.694, 0.0482, 0.335, 1);
+  transition: 0.4s cubic-bezier(0.694, 0.0482, 0.335, 1);
+  padding: 0;
+  background: #001830;
+  height: 100%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+}
+#playermenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#playermenu.open {
+  left: -250px;
+}
+#playermenu li a {
+  display: block;
+  font-size: 13px;
+  position: relative;
+  color: #B9BDC3;
+  line-height: 50px;
+  padding-left: 50px;
+  background: #373E45;
 }
 @media only screen and (min-width: 64em) {
   .mobile-menu {
