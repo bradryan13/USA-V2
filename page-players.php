@@ -25,7 +25,7 @@ get_header(); ?>
 
 
 	
-	<aside class="large-3 medium-3 columns sidebar" data-snap-ignore="true">
+	<aside class="large-2 medium-3 columns sidebar" data-snap-ignore="true">
 
 		<?php if ( ! dynamic_sidebar( 'club-side-bar' ) ) : ?>
 		<?php endif; ?>	
@@ -33,7 +33,7 @@ get_header(); ?>
 	</aside>
 
 
-	<section class="content-wrapper large-9 medium-9 columns">
+	<section class="content-wrapper large-10 medium-9 columns">
 		<div id="content">
 
 			<?php while ( have_posts() ) : the_post(); ?>
