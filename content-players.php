@@ -4,30 +4,31 @@
  *
  * @package USA Wheel Chair Rugby
  */
+
+
+$args = array(
+  'post_type' => 'player'
+);
+$the_query = new WP_Query( $args ); 
 ?>
 
-<div id="playermenu">
-	<ul>
-			<li><a id="menu-toggle">Menu Toggle</a></li>
-			<li><a><span>Bradley Ryan</span></a>
-			<li><a><span>Bradley Ryan</span></a>
-			<li><a><span>Bradley Ryan</span></a>
-	</ul>
-</div>
+<ul>
+<?php if( $the_query->have_posts() ): ?>
+<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<div class="entry-header">
-		<h1 class="title"><?php the_title(); ?></h1>
-	</div><!-- .entry-header -->
+	<li class="player row">
 
-	<div class="entry-content">
-		<?php the_content(); ?>
-		<?php
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'USAWCR' ),
-				'after'  => '</div>',
-			) );
-		?>
-	</div><!-- .entry-content -->
-	<?php edit_post_link( __( 'Edit', 'USAWCR' ), '<footer class="entry-meta"><span class="edit-link">', '</span></footer>' ); ?>
-</article><!-- #post-## -->
+		<div class="name large-2 columns"><a class="<?php echo $linkClass ?>" href="<?php echo get_permalink(); ?>"><?php the_post_thumbnail('small');?><?php the_title(); ?></a></td>
+		<div class="position large-2 columns"><?php the_field('position'); ?></td>
+		<div class="caps large-2 columns"><?php the_field('caps'); ?></td>
+		<div class="age large-2 columns"><?php the_field('age'); ?></td>
+		<div class="height large-2 columns"><?php the_field('height'); ?></td>
+		<div class="weight large-2 columns"><?php the_field('weight'); ?></td>
+		<div class="hometown large-2 columns"><?php the_field('hometown'); ?></td>
+
+
+	</li>
+
+<?php endwhile; ?>
+<?php endif; ?>
+</ul>
