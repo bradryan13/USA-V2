@@ -27,6 +27,8 @@
 
 <body <?php body_class(); ?>>
 
+TEST WP ENGINE AND GIT 
+
 <div class="mobile-menu">
 		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'my-menu') ); ?>
 </div>
