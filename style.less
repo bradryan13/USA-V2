@@ -16,6 +16,7 @@ Version:	2.0
 /* 1. Imports  -----------------------------------------------------*/
 
 //vendor
+@import "less/vendor/reset.less";
 @import "less/vendor/foundation.less";
 @import "less/vendor/font-awesome.less";
 @import "less/vendor/jquery.fancybox.less";
@@ -35,9 +36,9 @@ Version:	2.0
 
 /* 2. Fonts  ------------------------------------------------------*/
 
-@body-font: "source-sans-pro";
+@body-font: "proxima-nova";
 @narrow-font: "refrigerator-deluxe";
-@primary-font: "source-sans-pro";
+@primary-font: "proxima-nova";
 
 a {
 	text-decoration: none;
@@ -62,7 +63,7 @@ a {
 
 /* 5. Utilities -----------------------------------------------------*/
 
-@overflow-width: 1054px;
+@overflow-width: 1022px;
 
 .fixed { position: fixed;}
 
@@ -71,7 +72,7 @@ a {
 body {
 	font-family: @primary-font;
 	color: @darkgrey;
-	background: #F9F9F9 url('../img/background.jpg') center top no-repeat;
+	background: #FEFEFF url('../img/background.jpg') center top no-repeat;
 }
 
 #page {
@@ -102,4 +103,6 @@ main {
     -moz-backface-visibility:hidden; /* Firefox */
     -ms-backface-visibility:hidden; /* Internet Explorer 10+ */
 }
+
+
 
